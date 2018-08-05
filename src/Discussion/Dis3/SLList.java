@@ -35,7 +35,7 @@ public class SLList {
 
         IntNode currentNode = first;
 
-        if (position > 1 && currentNode.next != null) {
+        while (position > 1 && currentNode.next != null) {
             position--;
             currentNode = currentNode.next;
         }

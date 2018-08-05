@@ -70,5 +70,6 @@ public class SLList {
         x.addLast(5);
         x.addLast(10);
         x.addLast(15);
+        System.out.println(x.getFirst());
     }
 }

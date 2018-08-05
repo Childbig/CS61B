@@ -26,13 +26,9 @@ public class Pokemon {
     }
 
     public static void main(String[] args) {
-       /* Pokemon p = new Pokemon("pikachu", 17);
+        Pokemon p = new Pokemon("pikachu", 17);
         int level = 100;
         change(p, level);
-        System.out.println("Name:" + p.name + " level :" + p.level + "level: " + level);*/
-        String s = "ss";
-        String ss = new String("ss");
-        System.out.println(s == ss);
-        System.out.println(s.equals(ss));
+        System.out.println("Name:" + p.name + " level :" + p.level + "level: " + level);
     }
 }

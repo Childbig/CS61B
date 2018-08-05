@@ -19,10 +19,24 @@ public class IntList {
         this.rest = rest;
     }
 
+    public int size() {
+        if (rest == null) {
+            return 1;
+        }
+        return 1 + this.rest.size();
+    }
+
     public void addFirst(int x) {
         IntList p = this;
         this.first = x;
         this.rest = p;
+    }
+
+    public int get(int i) {
+        if (i == 0) {
+            return first;
+        }
+        return rest.get(i - 1);
     }
 
 
