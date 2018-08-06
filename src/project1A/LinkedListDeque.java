@@ -1,5 +1,9 @@
 package project1A;
 
+import proj1b.Deque;
+
+import java.awt.*;
+
 /*----------------------------------------------------------------
  *  Author:        Zhang Xuan
  *  Written:       2018/4/9
@@ -9,7 +13,7 @@ package project1A;
  *  Description: 
  *
  *----------------------------------------------------------------*/
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T> {
 
     public class Node {
         private Node prev;
@@ -28,50 +32,54 @@ public class LinkedListDeque<T> {
     private int size = 0;
 
     public LinkedListDeque() {
-        size = 0;
-        sentinel = new Node(sentinel, null, sentinel);
+        sentinel = new Node(this.sentinel, null, this.sentinel);
+        this.size = 0;
     }
 
     /**
      * Adds an item of type T to the front of the deque
      * @param item
      */
+    @Override
     public void addFirst(T item) {
-        Node newFrontNode;
-        if (size == 0) {
-            newFrontNode = new Node(this.sentinel, item, this.sentinel);
-            this.sentinel.prev = newFrontNode;
+        Node newFirstNode;
+
+        if (isEmpty()) {
+            newFirstNode = new Node(this.sentinel, item, this.sentinel);
+            this.sentinel.prev = newFirstNode;
         } else {
-            Node oldFrontNode = this.sentinel.next;
-            newFrontNode = new Node(this.sentinel, item, oldFrontNode);
+            Node oldFirstNode = this.sentinel.next;
+            newFirstNode = new Node(this.sentinel, item, oldFirstNode);
         }
-        this.sentinel.next = newFrontNode;
-        this.size += 1;
+        this.sentinel.next = newFirstNode;
+        this.size++;
     }
 
     /**
      * Adds an item of type T to the back of the deque
      * @param item
      */
+    @Override
     public void addLast(T item) {
-        Node newEndNode;
+        Node newLastNode;
 
-        if (this.size == 0) {
-            newEndNode = new Node(this.sentinel, item, this.sentinel);
-            this.sentinel.next = newEndNode;
+        if (isEmpty()) {
+            newLastNode = new Node(this.sentinel, item, this.sentinel);
+            this.sentinel.next = newLastNode;
         } else {
-            Node oldEndNode = this.sentinel.next;
-            newEndNode = new Node(oldEndNode, item, this.sentinel);
-            oldEndNode.next = newEndNode;
+            Node oldLastNode = this.sentinel.prev;
+            newLastNode = new Node(oldLastNode, item, this.sentinel);
+            oldLastNode.next = newLastNode;
         }
-        this.sentinel.prev = newEndNode;
-        this.size += 1;
+        this.sentinel.prev = newLastNode;
+        this.size++;
     }
 
     /**
      * Return true if deque is empty false otherwise
      * @return
      */
+    @Override
     public boolean isEmpty() {
         return this.size == 0;
     }
@@ -80,6 +88,7 @@ public class LinkedListDeque<T> {
      * Return the number of items in the deque
      * @return
      */
+    @Override
     public int size() {
         return this.size;
     }
@@ -87,8 +96,9 @@ public class LinkedListDeque<T> {
     /**
      * Prints the items in the deque from first to last, separated by a space
      */
+    @Override
     public void printDeque() {
-        Node p = sentinel.next;
+        Node p = this.sentinel.next;
 
         while (p != sentinel) {
             System.out.println(p.item + " ");
@@ -101,8 +111,20 @@ public class LinkedListDeque<T> {
      * If no such item exists, returns null
      * @return
      */
+    @Override
     public T removeFirst() {
-        return null;
+        T first;
+
+        Node oldFirstNode = this.sentinel.next;
+        first = oldFirstNode.item;
+
+        this.sentinel.next = oldFirstNode.next;
+        oldFirstNode.next.prev = this.sentinel;
+
+        this.size--;
+        oldFirstNode = null;
+
+        return first;
     }
 
     /**
@@ -110,8 +132,20 @@ public class LinkedListDeque<T> {
      * If no such item exists, returns null.
      * @return
      */
+    @Override
     public T removeLast() {
-        return null;
+        T last;
+
+        Node oldLastNode = this.sentinel.prev;
+        last = oldLastNode.item;
+
+        this.sentinel.prev = oldLastNode;
+        oldLastNode.prev.next = this.sentinel;
+
+        this.size--;
+        oldLastNode = null;
+
+        return last;
     }
 
     /**
@@ -120,12 +154,37 @@ public class LinkedListDeque<T> {
      * @param index
      * @return
      */
+    @Override
     public T get(int index) {
-        return null;
+        if (index < 0 && index > size) {
+            throw new IndexOutOfBoundsException("index must lsee then size or more the 0");
+        }
+
+        Node p = this.sentinel.next;
+
+        int count = 0;
+
+        while (count != index) {
+            p = p.next;
+            count ++;
+        }
+
+        return p.item;
     }
 
 
+    public static void main(String[] args) {
+        LinkedListDeque<Integer> linkedListDeque = new LinkedListDeque<>();
 
+        linkedListDeque.addFirst(1);
+        linkedListDeque.addFirst(2);
+        linkedListDeque.addFirst(3);
+        linkedListDeque.addFirst(4);
+        linkedListDeque.addLast(5);
+        linkedListDeque.addLast(6);
+        linkedListDeque.addLast(7);
+        linkedListDeque.addLast(8);
+        linkedListDeque.printDeque();
 
-
+    }
 }
