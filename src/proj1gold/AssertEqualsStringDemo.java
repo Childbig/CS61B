@@ -17,6 +17,6 @@ public class AssertEqualsStringDemo {
 
     /** This main method is optional. */
     public static void main(String[] args) {
-        jh61b.junit.TestRunner.runTests(AssertEqualsStringDemo.class);
+      /*  jh61b.junit.TestRunner.runTests(AssertEqualsStringDemo.class);*/
     }
 } 
