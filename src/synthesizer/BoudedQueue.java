@@ -1,26 +1,23 @@
-package hw1;
+package synthesizer;
 
 /******************************************************************************
- *  Author:        Zhang Xuan
- *  Written:       2018/8/24
- *  Last updated:  2018/8/24
- *  Compilation:   javac BoundedQueue.java
- *  Description: 
+ *  Author:        sa
+ *  Written:       2018/8/27
+ *  Last updated:  2018/8/27
+ *  Description:
  *
  ******************************************************************************/
+public interface BoudedQueue<T> {
 
-
-interface BoundedQueue<T> {
     int capacity();
     int fillCount();
-    void enqueue(T x);
+    void enqueue(T t);
     T dequeue();
     T peek();
 
     default boolean isEmpty() {
-        return fillCount() == 0;
+        return capacity() == 0;
     }
-
     default boolean isFull() {
         return fillCount() == capacity();
     }

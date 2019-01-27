@@ -1,5 +1,6 @@
 package Discussion.Dis2;
-import static java.lang.Math.*;
+
+import com.sun.org.apache.xerces.internal.xs.StringList;
 
 /*----------------------------------------------------------------
  *  Author:        Zhang Xuan
@@ -30,5 +31,6 @@ public class Pokemon {
         int level = 100;
         change(p, level);
         System.out.println("Name:" + p.name + " level :" + p.level + "level: " + level);
+
     }
 }
